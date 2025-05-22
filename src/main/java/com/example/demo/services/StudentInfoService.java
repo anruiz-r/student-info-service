@@ -3,15 +3,16 @@ package com.example.demo.services;
 import com.example.demo.models.StudentInfo;
 import com.example.demo.repositories.StudentInfoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
-import java.util.Optional;
 
 @Service
 public class StudentInfoService {
     @Autowired
-    private StudentInfoRepository studentInfoRepository;
+    StudentInfoRepository studentInfoRepository;
     public StudentInfo getStudentById(Long id) {
-        return studentInfoRepository.getById(id);
+        return studentInfoRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Estudiante no encontrado con id " + id));
     }
 }

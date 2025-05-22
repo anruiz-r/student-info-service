@@ -23,3 +23,4 @@ public class StudentInfoController {
         return studentService.getStudentById(id);
     }
 }
+
